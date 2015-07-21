@@ -2,12 +2,10 @@
 // Customized Carousel
 // --------------------------------------------------
 
-
 // Wrapper for the slide container and indicators
 .carousel {
   position: relative;
-  padding-top: 4px; // added
-  padding-bottom: 28px; // added
+  padding: 0px; // added
   background-color: @gray-lighter; // added
 }
 
@@ -19,6 +17,7 @@
   > .item {
     display: none;
     position: relative;
+    max-height: 1398.922px; // added
     .transition(.6s ease-in-out left);
 
     // Account for jankitude on images
@@ -27,6 +26,12 @@
       &:extend(.img-responsive);
       line-height: 1;
       min-width: 100%; // added
+      @media (min-width: @screen-md-min) {
+        margin-top: -40px;
+      }
+      @media (min-width: @screen-lg-min) {
+        margin-top: -60px;
+      }
     }
 
     // WebKit CSS3 transforms for supported devices
@@ -40,11 +45,13 @@
         .translate3d(100%, 0, 0);
         left: 0;
       }
+
       &.prev,
       &.active.left {
         .translate3d(-100%, 0, 0);
         left: 0;
       }
+
       &.next.left,
       &.prev.right,
       &.active {
@@ -132,7 +139,8 @@
   .icon-next,
   .glyphicon-chevron-left,
   .glyphicon-chevron-right,
-  .icon{ //add
+  .icon {
+    //add
     position: absolute;
     top: 50%;
     margin-top: -10px;
@@ -141,33 +149,34 @@
   }
   .icon-prev,
   .glyphicon-chevron-left,
-  &.left .icon{ // add
+  &.left .icon {
+    // add
     left: 20%; // edited was 50%
     margin-left: -10px;
   }
   .icon-next,
   .glyphicon-chevron-right,
-  &.right .icon{ // add
+  &.right .icon {
+    // add
     right: 20%; // edited was 50%
     margin-right: -10px;
   }
   .icon-prev,
   .icon-next {
-    width:  20px;
+    width: 20px;
     height: 20px;
     line-height: 1;
     font-family: serif;
   }
 
-
   .icon-prev {
     &:before {
-      content: '\2039';// SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)
+      content: '\2039'; // SINGLE LEFT-POINTING ANGLE QUOTATION MARK (U+2039)
     }
   }
   .icon-next {
     &:before {
-      content: '\203a';// SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)
+      content: '\203a'; // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (U+203A)
     }
   }
 }
@@ -179,7 +188,7 @@
 
 .carousel-indicators {
   position: absolute;
-  bottom: 10px;
+  bottom: 0; //edited was 10px
   left: 50%;
   z-index: 15;
   width: 60%;
@@ -190,11 +199,12 @@
 
   li {
     display: inline-block;
-    width:  10px;
-    height: 10px;
-    margin: 1px;
+    width: 16px; // edited was 10px;
+    height: 16px; // edited was 10px;
+    //margin: 1px; //edited
     text-indent: -999px;
-    border: 1px solid @carousel-indicator-border-color;
+    background-color: @carousel-indicator-bg; // added
+    //border: 1px solid @carousel-indicator-border-color;
     border-radius: 10px;
     cursor: pointer;
 
@@ -207,13 +217,14 @@
     //
     // For IE8, we set solid black as it doesn't support `rgba()`. For IE9, we
     // set alpha transparency for the best results possible.
-    background-color: #000 \9; // IE8
-    background-color: rgba(0,0,0,0); // IE9
+    //background-color: #000 \9; // IE8 // edited
+    //background-color: rgba(0, 0, 0, 0); // IE9 // edited
   }
+  li:hover, //added
   .active {
-    margin: 0;
-    width:  12px;
-    height: 12px;
+    margin: 0; // edited
+    width: 16px; // edited was 12px
+    height: 16px; // edited was 12px
     background-color: @carousel-indicator-active-bg;
   }
 }
@@ -236,7 +247,6 @@
     text-shadow: none; // No shadow for button elements in carousel-caption
   }
 }
-
 
 // Scale up controls for tablets and up
 @media screen and (min-width: @screen-sm-min) {
@@ -270,7 +280,7 @@
   }
 
   // Move up the indicators
-  .carousel-indicators {
-    bottom: 20px;
-  }
+  //.carousel-indicators {
+  //  bottom: 20px;
+  //}
 }
