@@ -6,6 +6,9 @@
 // Wrapper for the slide container and indicators
 .carousel {
   position: relative;
+  padding-top: 4px; // added
+  padding-bottom: 28px; // added
+  background-color: @gray-lighter; // added
 }
 
 .carousel-inner {
@@ -23,6 +26,7 @@
     > a > img {
       &:extend(.img-responsive);
       line-height: 1;
+      min-width: 100%; // added
     }
 
     // WebKit CSS3 transforms for supported devices
