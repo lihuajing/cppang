@@ -102,7 +102,7 @@ $(document).ready(function () {
                     'width': chartCurrentWidth * 0.9 + 'px',
                     'height': chartCurrentHeight * 0.9 + 'px'
                 });
-                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close'), chartTitle = newChart.find('span.ui-dialog-title'),chartContent=newChart.find('.ui-dialog-content.ui-widget-content');
                 closeBtn.removeAttr('disabled');
                 closeBtn.delegate(closeBtn, 'click', function () {
                     $("#chartRemove").dialog({
@@ -120,7 +120,29 @@ $(document).ready(function () {
                             }
                         }
                     });
-                })
+                });
+                chartTitle.css('cursor', 'pointer');
+                chartTitle.delegate(chartTitle, 'click', function () {
+                    $("#chartTitle").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            ok: function () {
+                                $(this).dialog("close");
+                                chartTitle.text($(this).find('input').val());
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                });
+                chartContent.css('cursor', 'pointer');
+                chartContent.delegate(chartContent,'click',function(){
+                    chartContent.text('');
+                    alert('use easyChart soon!');
+                });
             }
         }
     });
@@ -144,7 +166,7 @@ $(document).ready(function () {
                     'width': chartCurrentWidth * 0.9 + 'px',
                     'height': chartCurrentHeight * 0.9 + 'px'
                 });
-                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close'), chartTitle = newChart.find('span.ui-dialog-title'),chartContent=newChart.find('.ui-dialog-content.ui-widget-content');
                 closeBtn.removeAttr('disabled');
                 closeBtn.delegate(closeBtn, 'click', function () {
                     $("#chartRemove").dialog({
@@ -162,7 +184,29 @@ $(document).ready(function () {
                             }
                         }
                     });
-                })
+                });
+                chartTitle.css('cursor', 'pointer');
+                chartTitle.delegate(chartTitle, 'click', function () {
+                    $("#chartTitle").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            ok: function () {
+                                $(this).dialog("close");
+                                chartTitle.text($(this).find('input').val());
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                });
+                chartContent.css('cursor', 'pointer');
+                chartContent.delegate(chartContent,'click',function(){
+                    chartContent.text('');
+                    alert('use easyChart soon!');
+                });
             }
         }
     });
@@ -185,7 +229,7 @@ $(document).ready(function () {
                     'width': chartCurrentWidth * 0.9 + 'px',
                     'height': chartCurrentHeight * 0.9 + 'px'
                 });
-                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close'), chartTitle = newChart.find('span.ui-dialog-title'),chartContent=newChart.find('.ui-dialog-content.ui-widget-content');
                 closeBtn.removeAttr('disabled');
                 closeBtn.delegate(closeBtn, 'click', function () {
                     $("#chartRemove").dialog({
@@ -203,7 +247,29 @@ $(document).ready(function () {
                             }
                         }
                     });
-                })
+                });
+                chartTitle.css('cursor', 'pointer');
+                chartTitle.delegate(chartTitle, 'click', function () {
+                    $("#chartTitle").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            ok: function () {
+                                $(this).dialog("close");
+                                chartTitle.text($(this).find('input').val());
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                });
+                chartContent.css('cursor', 'pointer');
+                chartContent.delegate(chartContent,'click',function(){
+                    chartContent.text('');
+                    alert('use easyChart soon!');
+                });
             }
         }
     });
