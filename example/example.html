@@ -10,8 +10,8 @@
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" href="../css/jquery-ui.min.css">
-    <link rel="stylesheet" href="../css/jquery-ui.theme.min.css">
-    <link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
+    <!--<link rel="stylesheet" href="../css/jquery-ui.theme.min.css">-->
+    <!--<link rel="stylesheet" href="../css/jquery-ui.structure.min.css">-->
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/custom.css">
@@ -54,53 +54,84 @@
                     <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Components</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-pushpin"></span> Plugins</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Customize</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-leaf"></span> Example</a></li>
-                    <li class="active"><a href="example.html"><span class="glyphicon glyphicon-home"></span> Example<span
-                        class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="example.html"><span class="glyphicon glyphicon-home"></span>
+                        Example<span
+                            class="sr-only">(current)</span></a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 <main role="main">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2 module-left">
-            <div id="chartContainer1">
-                <h3>chartType1</h3>
-                <div id="chartInstance1" title="chartType1">chartInstance</div>
+    <span id="x"></span>
+    <span id="y"></span>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 module-left">
+                <div id="chartContainer1" style="min-height:200px;">
+                    <h3>chartType1</h3>
+
+                    <div id="chartInstance1" title="chartType1">Put a chart here</div>
+                </div>
+                <div id="chartContainer2" style="min-height:200px;">
+                    <h3>chartType2</h3>
+
+                    <div id="chartInstance2" title="chartType2">Put a chart here</div>
+                </div>
+                <div id="chartContainer3" style="min-height:200px;">
+                    <h3>chartType3</h3>
+
+                    <div id="chartInstance3" title="chartType3">Put a chart here</div>
+                </div>
             </div>
-            <div id="chartContainer2">
-                <h3>chartType2</h3>
-                <div id="chartInstance2" title="chartType2">chartInstance</div>
-            </div>
-            <div id="chartContainer3">
-                <h3>chartType3</h3>
-                <div id="chartInstance3" title="chartType3">chartInstance</div>
-            </div>
-        </div>
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-12"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12"></div>
+            <div class="col-sm-10" id="dropContainer">
+                <div class="row" style="margin-right: 15px;">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-right: 15px;">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-right: 15px;">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-right: 15px;">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-right: 15px;">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div id="chartRemove" title="delete this chart?">
+        <p><span class="ui-icon ui-icon-alert" style="float:left;"></span>This chart will be permanently deleted and cannot be recovered. Are you sure?</p>
+    </div>
 </main>
 <footer role="contentinfo">
     <p><img src="../img/logo.jpg" alt="cppang" width="64"/></p>
@@ -120,7 +151,7 @@
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
 <script src="../js/vendor/jquery-ui.min.js"></script>
-<script src="../js/plugins.js"></script>
+<!--<script src="../js/plugins.js"></script>-->
 <script src="../js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

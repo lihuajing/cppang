@@ -1,75 +1,210 @@
 $(document).ready(function () {
-
-    //draggable method
-
-    //var dragElement = $('#table1'),
-    //dropElement = $('#smallContainer');
-    //dragElement.draggable({
-    //addClasses: true,
-    //appendTo: '#bigContainer',
-    //helper: 'clone',
-    //axis:'x',
-    //cancel: 'div',
-    //connectToSortable:'#smallContainer',
-    //containment: '#smallContainer',
-    //cursor: 'pointer',
-    //cursorAt: {right: 50},
-    //delay:1000,
-    //disabled:true,
-    //distance:20,
-    //grid: [10, 10],
-    //handle:'#dragContainer',
-    //iframeFix:true,
-    //opacity: 0.5,
-    //refreshPositions: false,
-    //revert:'invalid',
-    //revertDuration:3000,
-    //scope:'putHere',
-    //scroll: true,
-    //scrollSensitivity: 200,
-    //scrollSpeed:50,
-    //snap: true,
-    //snapMode:'inner',
-    //snapTolerance:10,
-    //stack:'#table5',
-    //zIndex:100,
-    //});
-    //$('#table1').draggable('destroy');
-    //$('#table1').draggable('disable');
-    //$('#table1').draggable('enable');
-    //var ins=$('#table1').draggable('instance');
-    //var options=$('#table1').draggable('option','cursorAt.right');
-    //var options=$('#table1').draggable('option');
-    //$('#table1').draggable('option','scroll',false);
-    //$('#table1').draggable('option',{'scroll':false,'snap':false});
-    //var widget = $("#table1").draggable("widget");
-    //dragElement.bind('dragstop', function (event, ui) {
-    //    ui.helper.clone().appendTo(dropElement)
-    //});
-    //dropElement.droppable();
-
     //dialog method
-    var chart1 = $("#chartInstance1"),
-        chart2 = $("#chartInstance2"),
-        chart3 = $("#chartInstance3");
-
-    chart1.dialog({
-        appendTo: "#chartContainer1",
+    var chart1 = $('#chartInstance1'),
+        chart2 = $('#chartInstance2'),
+        chart3 = $('#chartInstance3');
+    var chartContainer1 = $('#chartContainer1'),
+        chartContainer2 = $('#chartContainer2'),
+        chartContainer3 = $('#chartContainer3');
+    var chartContainerWidth1 = chartContainer1.css('width'),
+        chartContainerWidth2 = chartContainer2.css('width'),
+        chartContainerWidth3 = chartContainer3.css('width');
+    $(window).resize(function () {
+        chartContainerWidth1 = chartContainer1.css('width');
+        chartContainerWidth2 = chartContainer2.css('width');
+        chartContainerWidth3 = chartContainer3.css('width');
+        widget1.css('width', chartContainerWidth1);
+        widget2.css('width', chartContainerWidth2);
+        widget3.css('width', chartContainerWidth3);
+        chartCeils.each(function () {
+            var ceilWidth = $(this).css('width').split('px')[0], ceilHeight = $(this).css('height').split('px')[0];
+            $(this).find('.ui-dialog.ui-widget').css({
+                'left': ceilWidth * 0.05 + 'px',
+                'top': ceilHeight * 0.05 + 'px',
+                'width': ceilWidth * 0.9 + 'px',
+                'height': ceilHeight * 0.9 + 'px'
+            });
+        });
+    });
+    var widget1 = chart1.dialog({
         autoOpen: true,
-        buttons: [
-            {
-                text: "Ok",
-                icons: {
-                    primary: "ui-icon-heart"
-                },
-                click: function () {
-                    $(this).dialog("close");
-                }
+        width: chartContainerWidth1,
+        appendTo: '#chartContainer1',
+        position: {my: 'center', at: 'center', of: '#chartContainer1', within: '#chartContainer1'},
+        draggable: false,
+        resizable: false,
+        focus: function (event, ui) {
+            $('button.ui-dialog-titlebar-close').blur().attr('disabled', 'true');
+        }
+    }).dialog('widget');
+    var widget2 = chart2.dialog({
+        autoOpen: true,
+        width: chartContainerWidth2,
+        appendTo: '#chartContainer2',
+        position: {my: 'center', at: 'center', of: '#chartContainer2', within: '#chartContainer2'},
+        draggable: false,
+        resizable: false,
+        focus: function (event, ui) {
+            $('button.ui-dialog-titlebar-close').blur().attr('disabled', 'true');
+        }
+    }).dialog('widget');
+    var widget3 = chart3.dialog({
+        autoOpen: true,
+        width: chartContainerWidth3,
+        appendTo: '#chartContainer3',
+        position: {my: 'center', at: 'center', of: '#chartContainer3', within: '#chartContainer3'},
+        draggable: false,
+        resizable: false,
+        focus: function (event, ui) {
+            $('button.ui-dialog-titlebar-close').blur().attr('disabled', 'true');
+        }
+    }).dialog('widget');
 
-                // Uncommenting the following line would hide the text,
-                // resulting in the label being used as a tooltip
-                // showText: false
+    var dropContainer = $('#dropContainer'), chartCeils = dropContainer.find('.chartCeil'), isRevert = false;
+    var chartCurrentCeil, chartCurrentWidth, chartCurrentHeight;
+
+    chartCeils.each(function () {
+        $(this).droppable({
+            accept: '.ui-dialog.ui-draggable',
+            tolerance: 'fit',
+            over: function () {
+                $(this).toggleClass('ui-state-highlight');
+                chartCurrentCeil = $(this);
+                chartCurrentWidth = $(this).css('width').split('px')[0];
+                chartCurrentHeight = $(this).css('height').split('px')[0];
+            },
+            out: function () {
+                $(this).toggleClass('ui-state-highlight');
+            },
+            drop: function () {
+                isRevert = true;
+                $(this).toggleClass('ui-state-highlight');
             }
-        ]
+        });
+    });
+
+    widget1.draggable({
+        //appendTo: '#dropContainer',
+        helper: 'clone',
+        cursor: 'pointer',
+        opacity: 0.5,
+        revert: 'invalid',
+        drag: function (event, ui) {
+            isRevert = false;
+        },
+        stop: function (event, ui) {
+            if (isRevert) {
+                var newChart = ui.helper.clone();
+                newChart.appendTo(chartCurrentCeil);
+                newChart.css({
+                    'left': chartCurrentWidth * 0.05 + 'px',
+                    'top': chartCurrentHeight * 0.05 + 'px',
+                    'width': chartCurrentWidth * 0.9 + 'px',
+                    'height': chartCurrentHeight * 0.9 + 'px'
+                });
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                closeBtn.removeAttr('disabled');
+                closeBtn.delegate(closeBtn, 'click', function () {
+                    $("#chartRemove").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            "Delete": function () {
+                                $(this).dialog("close");
+                                newChart.remove();
+
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                })
+            }
+        }
+    });
+
+    widget2.draggable({
+        //appendTo: '#dropContainer',
+        helper: 'clone',
+        cursor: 'pointer',
+        opacity: 0.5,
+        revert: 'invalid',
+        drag: function (event, ui) {
+            isRevert = false;
+        },
+        stop: function (event, ui) {
+            if (isRevert) {
+                var newChart = ui.helper.clone();
+                newChart.appendTo(chartCurrentCeil);
+                newChart.css({
+                    'left': chartCurrentWidth * 0.05 + 'px',
+                    'top': chartCurrentHeight * 0.05 + 'px',
+                    'width': chartCurrentWidth * 0.9 + 'px',
+                    'height': chartCurrentHeight * 0.9 + 'px'
+                });
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                closeBtn.removeAttr('disabled');
+                closeBtn.delegate(closeBtn, 'click', function () {
+                    $("#chartRemove").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            "Delete": function () {
+                                $(this).dialog("close");
+                                newChart.remove();
+
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                })
+            }
+        }
+    });
+    widget3.draggable({
+        //appendTo: '#dropContainer',
+        helper: 'clone',
+        cursor: 'pointer',
+        opacity: 0.5,
+        revert: 'invalid',
+        drag: function (event, ui) {
+            isRevert = false;
+        },
+        stop: function (event, ui) {
+            if (isRevert) {
+                var newChart = ui.helper.clone();
+                newChart.appendTo(chartCurrentCeil);
+                newChart.css({
+                    'left': chartCurrentWidth * 0.05 + 'px',
+                    'top': chartCurrentHeight * 0.05 + 'px',
+                    'width': chartCurrentWidth * 0.9 + 'px',
+                    'height': chartCurrentHeight * 0.9 + 'px'
+                });
+                var closeBtn = newChart.find('button.ui-dialog-titlebar-close');
+                closeBtn.removeAttr('disabled');
+                closeBtn.delegate(closeBtn, 'click', function () {
+                    $("#chartRemove").dialog({
+                        resizable: false,
+                        height: 200,
+                        modal: true,
+                        buttons: {
+                            "Delete": function () {
+                                $(this).dialog("close");
+                                newChart.remove();
+
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                })
+            }
+        }
     });
 });
