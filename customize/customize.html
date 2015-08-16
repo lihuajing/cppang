@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh">
+<html lang="en" ng-app="myAngular">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>cppang&#39;s-blog-example</title>
+    <title>cppang&#39;s-blog-customize</title>
     <meta name="description" content="my-blog-cppang">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,6 +30,7 @@
 
 <!-- Add your site or application content here -->
 
+
 <header role="banner">
     <nav role="navigation" class="navbar navbar-static-top navbar-default">
         <div class="container-fluid">
@@ -45,7 +46,8 @@
             </div>
             <div class="collapse navbar-collapse" id="public-topbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="../index.html"><span class="glyphicon glyphicon-leaf"></span> Home</a></li>
+                    <li class="active"><a href="../index.html"><span class="glyphicon glyphicon-home"></span> HOME<span
+                        class="sr-only">(current)</span></a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-book"></span> Article</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-check"></span> Note</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Start</a></li>
@@ -54,87 +56,30 @@
                     <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Components</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-pushpin"></span> Plugins</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Customize</a></li>
-                    <li class="active"><a href="example.html"><span class="glyphicon glyphicon-home"></span>
-                        Example<span
-                            class="sr-only">(current)</span></a></li>
+                    <li><a href="../example/example.html"><span class="glyphicon glyphicon-leaf"></span> Example</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
 <main role="main">
-    <span id="x"></span>
-    <span id="y"></span>
-
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2 module-left">
-                <div id="chartContainer1" style="min-height:200px;">
-                    <h3>chartType1</h3>
+            <div class="col-sm-12" ng-controller="TextController">
+                <p>{{someText.message}}</p>
 
-                    <div id="chartInstance1" title="chartType1">Put a chart here</div>
-                </div>
-                <div id="chartContainer2" style="min-height:200px;">
-                    <h3>chartType2</h3>
-
-                    <div id="chartInstance2" title="chartType2">Put a chart here</div>
-                </div>
-                <div id="chartContainer3" style="min-height:200px;">
-                    <h3>chartType3</h3>
-
-                    <div id="chartInstance3" title="chartType3">Put a chart here</div>
-                </div>
-            </div>
-            <div class="col-sm-10" id="dropContainer">
-                <div class="row" style="margin-right: 15px;">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-right: 15px;">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-right: 15px;">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-right: 15px;">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-right: 15px;">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-4 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                            <div class="col-sm-8 chartCeil" style="border: 1px dashed gray;min-height: 250px;"></div>
-                        </div>
-                    </div>
-                </div>
+                <form ng-controller="SomeController">
+                    <label><input type="checkbox" ng-model="youCheckedIt"/>myCheck</label>
+                </form>
+                <form ng-controller="StartUpController" ng-submit="requestFunding()">
+                    Starting:<input ng-model="funding.startingEstimate"/>
+                    Recommendation:{{funding.needed}}
+                    <button>Fund my startup</button>
+                    <button ng-click="reset()">Reset</button>
+                </form>
             </div>
         </div>
-    </div>
-    <div id="chartRemove" title="delete this chart?">
-        <p><span class="ui-icon ui-icon-alert" style="float:left;"></span>This chart will be permanently deleted and
-            cannot be recovered. Are you sure?</p>
-    </div>
-    <div id="chartTitle" title="input chart title!">
-        <label for="chartTitleInput" style="width: 100%;margin: 5% 0;"><input id="chartTitleInput" type="text" style="width: 100%;"></label>
     </div>
 </main>
 <footer role="contentinfo">
@@ -156,7 +101,8 @@
 <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
 <script src="../js/vendor/jquery-ui.min.js"></script>
 <!--<script src="../js/plugins.js"></script>-->
-<script src="js/example.js"></script>
+<script src="../js/angular.js"></script>
+<script src="js/customize.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>
