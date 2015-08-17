@@ -46,16 +46,16 @@
             </div>
             <div class="collapse navbar-collapse" id="public-topbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="../index.html"><span class="glyphicon glyphicon-home"></span> HOME<span
-                        class="sr-only">(current)</span></a></li>
+                    <li><a href="../index.html"><span class="glyphicon glyphicon-home"></span> HOME</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-book"></span> Article</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-check"></span> Note</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Start</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> CSS</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-fire"></span> JavaScript</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-gift"></span> Components</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-pushpin"></span> Plugins</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-briefcase"></span> Customize</a></li>
+                    <li><a href="../plugins/plugins.html"><span class="glyphicon glyphicon-pushpin"></span> Plugins</a></li>
+                    <li class="active"><a href="customize.html"><span class="glyphicon glyphicon-briefcase"></span> Customize<span
+                        class="sr-only">(current)</span></a></li>
                     <li><a href="../example/example.html"><span class="glyphicon glyphicon-leaf"></span> Example</a>
                     </li>
                 </ul>
@@ -66,9 +66,10 @@
 <main role="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12" ng-controller="TextController">
-                <p>{{someText.message}}</p>
-
+            <div class="col-sm-12">
+                <div ng-controller="TextController">
+                    <p>{{someText.message}}</p>
+                </div>
                 <form ng-controller="SomeController">
                     <label><input type="checkbox" ng-model="youCheckedIt"/>myCheck</label>
                 </form>
@@ -107,11 +108,37 @@
                     <button ng-click="showWarning()">Simulate Warning</button>
                 </div>
                 <table ng-controller="RestaurantTableController">
-                    <tr ng-repeat="restaurant in directory" ng-click="selectRestaurant($index)" ng-class="{selected:$index==selectedRow}">
+                    <tr ng-repeat="restaurant in directory" ng-click="selectRestaurant($index)"
+                        ng-class="{selected:$index==selectedRow}">
                         <td>{{restaurant.name}}</td>
                         <td>{{restaurant.cuisine}}</td>
                     </tr>
                 </table>
+                <div ng-controller="CartController">
+                    <div ng-repeat="item in items">
+                        <span>{{item.title}}</span>
+                        <input ng-model="item.quantity"/>
+                        <span>{{item.price|currency}}</span>
+                        <span>{{item.price*item.quantity|currency}}</span>
+                    </div>
+                    <div>Total:{{bill.total|currency}}</div>
+                    <div>Discount:{{bill.discount|currency}}</div>
+                    <div>Subtotal:{{bill.subtotal|currency}}</div>
+                </div>
+                <div ng-controller="ShoppingController">
+                    <h1>Shopping!</h1>
+                    <table ng-repeat="item in items">
+                        <tr>
+                            <td>{{item.title}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.price|currency}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div ng-controller="HomeController">
+                    <h1>{{12.9|currency}}</h1>
+                    <h1>{{pageHeading|titleCase}}</h1>
+                </div>
             </div>
         </div>
     </div>
