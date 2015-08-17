@@ -78,6 +78,40 @@
                     <button>Fund my startup</button>
                     <button ng-click="reset()">Reset</button>
                 </form>
+                <div ng-controller="StudentListController">
+                    <ul>
+                        <li ng-repeat="student in students">
+                            <a href="/student/view/{{student.id}}">{{student.name}}</a>
+                        </li>
+                    </ul>
+                    <button ng-click="insertTom()">Insert</button>
+                </div>
+                <table ng-controller="AlbumController">
+                    <tr ng-repeat="track in album">
+                        <td>{{$index+1}}</td>
+                        <td>{{track.name}}</td>
+                        <td>{{track.duration}}</td>
+                    </tr>
+                </table>
+                <div ng-controller="DeathRayMenuController">
+                    <button ng-click="toggleMenu()">Toggle Menu</button>
+                    <ul ng-show="menuState.show">
+                        <li class="menu-disabled-{{isDisabled}}" ng-click="stun()">Stun</li>
+                        <li ng-click="disintegrate()">Disintegrate</li>
+                        <li ng-click="erase()">Erase from history</li>
+                    </ul>
+                </div>
+                <div ng-controller="HeaderController">
+                    <div ng-class="{error: isError,warning:isWarning}">{{messageText}}</div>
+                    <button ng-click="showError()">Simulate Error</button>
+                    <button ng-click="showWarning()">Simulate Warning</button>
+                </div>
+                <table ng-controller="RestaurantTableController">
+                    <tr ng-repeat="restaurant in directory" ng-click="selectRestaurant($index)" ng-class="{selected:$index==selectedRow}">
+                        <td>{{restaurant.name}}</td>
+                        <td>{{restaurant.cuisine}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

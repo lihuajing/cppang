@@ -29,3 +29,53 @@ app.controller('StartUpController', function ($scope) {
     }
 });
 
+app.controller('StudentListController', function ($scope) {
+    var students = [{name: 'Mary Contrary', id: '1'}, {name: 'Jack Sprat', id: '2'}, {name: 'Jill Hill', id: '3'}];
+    $scope.students = students;
+    $scope.insertTom = function () {
+        $scope.students.splice(1, 0, {name: 'Tom Thumb', id: '4'});
+    };
+});
+
+app.controller('AlbumController', function ($scope) {
+    var album = [{name: 'Southwest Serenade', duration: '2:34'}, {
+        name: 'Northern Light Waltz',
+        duration: '3:21'
+    }, {name: 'Eastern Tango', duration: '17:45'}];
+    $scope.album = album;
+});
+
+app.controller('DeathRayMenuController', function ($scope) {
+    $scope.menuState = {show: false};
+    $scope.toggleMenu = function () {
+        $scope.menuState.show = !$scope.menuState.show;
+    };
+    $scope.isDisabled=false;
+    $scope.stun=function(){
+        $scope.isDisabled=true;
+    }
+});
+
+app.controller('HeaderController',function($scope){
+    $scope.isError=false;
+    $scope.isWarning=false;
+    $scope.showError=function(){
+        $scope.messageText='This is an error!';
+        $scope.isError=true;
+        $scope.isWarning=false;
+    };
+    $scope.showWarning=function(){
+        $scope.messageText='Just a warning, Please carry on!';
+        $scope.isError=false;
+        $scope.isWarning=true;
+    }
+});
+
+app.controller('RestaurantTableController',function($scope){
+    $scope.directory=[{name:'The Handsome Heifer',cuisine:'BBQ'},{name:'Green\'s Green Greens',cuisine:'Salads'},{name:'House of Fine Fish',cuisine:'Seafood'}];
+    $scope.selectRestaurant=function(row){
+        $scope.selectedRow=row;
+    }
+});
+
+
